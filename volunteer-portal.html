@@ -21,13 +21,13 @@
             padding: 20px;
         }
 
-        /* ============ AUTH SCREEN ============ */
-        .auth-container {
+        /* ============ REGISTRATION SCREEN ============ */
+        .registration-container {
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             padding: 40px;
             animation: slideUp 0.6s ease-out;
         }
@@ -43,57 +43,28 @@
             }
         }
 
-        .auth-header {
+        .reg-header {
             text-align: center;
             margin-bottom: 40px;
         }
 
-        .auth-header h1 {
+        .reg-header h1 {
             color: #1E88E5;
             font-size: 28px;
             margin-bottom: 10px;
         }
 
-        .auth-header p {
+        .reg-header p {
             color: #666;
             font-size: 14px;
+            margin-bottom: 20px;
         }
 
-        .auth-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
+        .tagline {
             color: #999;
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .auth-tab.active {
-            color: #1E88E5;
-            border-bottom-color: #1E88E5;
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            font-size: 13px;
+            font-style: italic;
+            margin-bottom: 5px;
         }
 
         .form-group {
@@ -224,21 +195,6 @@
             font-weight: 700;
         }
 
-        .btn-logout {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 12px 24px;
-            border: 2px solid white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-logout:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
         .welcome-card {
             background: white;
             border-radius: 15px;
@@ -295,24 +251,6 @@
             }
         }
 
-        .btn-join {
-            background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
-            color: white;
-            padding: 14px 32px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-join:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(30, 136, 229, 0.4);
-        }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -352,11 +290,6 @@
             font-size: 42px;
             font-weight: 700;
             margin-bottom: 10px;
-        }
-
-        .stat-subtitle {
-            color: #666;
-            font-size: 14px;
         }
 
         .counter-section {
@@ -486,7 +419,7 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .auth-container {
+            .registration-container {
                 padding: 30px 20px;
             }
 
@@ -528,20 +461,6 @@
             }
         }
 
-        .hidden {
-            display: none !important;
-        }
-
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #1E88E5;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
         .notification {
             position: fixed;
             top: 20px;
@@ -573,44 +492,20 @@
     </style>
 </head>
 <body>
-    <!-- Auth Screen -->
-    <div id="authScreen" class="auth-container">
-        <div class="auth-header">
+    <!-- Registration Screen -->
+    <div id="registrationScreen" class="registration-container">
+        <div class="reg-header">
             <h1>💙 HEAL Movement</h1>
             <p>Volunteer Portal</p>
+            <div class="tagline">Join the Movement. Make a Difference.</div>
         </div>
-
-        <div class="auth-tabs">
-            <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
-            <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
-        </div>
-
-        <!-- Login Form -->
-        <form id="loginForm" class="auth-form active">
-            <div id="loginError" class="error-message"></div>
-            <div class="form-group">
-                <label for="loginAdmission">Admission Number</label>
-                <input type="text" id="loginAdmission" placeholder="Enter your admission number" required>
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">
-                <span id="loginBtnText">Login to Dashboard</span>
-            </button>
-        </form>
 
         <!-- Registration Form -->
-        <form id="registerForm" class="auth-form">
+        <form id="registerForm">
             <div id="registerError" class="error-message"></div>
             <div class="form-group">
-                <label for="registerName">Full Name</label>
-                <input type="text" id="registerName" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-                <label for="registerAdmission">Admission Number</label>
-                <input type="text" id="registerAdmission" placeholder="Your admission number" required>
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" placeholder="Your email address" required>
             </div>
             <div class="form-group">
                 <label for="registerPassword">Create Password</label>
@@ -622,7 +517,7 @@
                 <div id="passwordError" class="password-error">Passwords do not match</div>
             </div>
             <button type="submit" class="btn btn-primary">
-                <span id="registerBtnText">Create Account</span>
+                <span id="registerBtnText">Join as a Volunteer</span>
             </button>
         </form>
     </div>
@@ -631,7 +526,6 @@
     <div id="dashboardScreen" class="dashboard-container">
         <div class="dashboard-header">
             <div class="dashboard-title">💙 HEAL Movement Team</div>
-            <button class="btn-logout" onclick="logout()">Logout</button>
         </div>
 
         <div class="welcome-card">
@@ -711,15 +605,7 @@
         let currentUser = null;
         let hasPledged = false;
 
-        // ============ AUTH FUNCTIONS ============
-        function switchAuthTab(tab) {
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(tab === 'login' ? 'loginForm' : 'registerForm').classList.add('active');
-        }
-
+        // ============ REGISTRATION FUNCTIONS ============
         document.getElementById('registerPassword').addEventListener('change', validatePasswords);
         document.getElementById('registerConfirm').addEventListener('keyup', validatePasswords);
 
@@ -739,8 +625,7 @@
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const name = document.getElementById('registerName').value.trim();
-            const admission = document.getElementById('registerAdmission').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
             const password = document.getElementById('registerPassword').value;
             const confirm = document.getElementById('registerConfirm').value;
             const errorEl = document.getElementById('registerError');
@@ -751,8 +636,13 @@
             errorEl.innerHTML = '';
 
             // Validation
-            if (!name || !admission || !password || !confirm) {
+            if (!email || !password || !confirm) {
                 showError(errorEl, 'All fields are required');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showError(errorEl, 'Please enter a valid email address');
                 return;
             }
 
@@ -768,15 +658,15 @@
 
             try {
                 btn.disabled = true;
-                btnText.innerHTML = '<span class="loading"></span>Creating account...';
+                btnText.innerHTML = '<span class="loading"></span>Joining movement...';
 
-                // Check if admission number exists
+                // Check if email already exists
                 const existingQuery = await db.collection('volunteers')
-                    .where('admissionNumber', '==', admission)
+                    .where('email', '==', email)
                     .get();
 
                 if (!existingQuery.empty) {
-                    throw new Error('This admission number is already registered');
+                    throw new Error('This email is already registered');
                 }
 
                 // Hash password (in production, use proper server-side hashing)
@@ -784,8 +674,7 @@
 
                 // Create volunteer
                 const volunteer = {
-                    name,
-                    admissionNumber: admission,
+                    email,
                     passwordHash,
                     joinedAt: new Date().toISOString(),
                     pledged: false
@@ -802,78 +691,20 @@
                     ...volunteer
                 };
 
-                showNotification('Account created successfully!', 'success');
+                showNotification('Welcome to the HEAL Movement! 💙', 'success');
                 setTimeout(() => showDashboard(), 1000);
 
             } catch (error) {
                 showError(errorEl, error.message || 'Registration failed');
             } finally {
                 btn.disabled = false;
-                btnText.innerHTML = 'Create Account';
-            }
-        });
-
-        // Login Form
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const admission = document.getElementById('loginAdmission').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            const errorEl = document.getElementById('loginError');
-            const btnText = document.getElementById('loginBtnText');
-            const btn = e.target.querySelector('button');
-
-            errorEl.classList.remove('show');
-            errorEl.innerHTML = '';
-
-            if (!admission || !password) {
-                showError(errorEl, 'Please enter both admission number and password');
-                return;
-            }
-
-            try {
-                btn.disabled = true;
-                btnText.innerHTML = '<span class="loading"></span>Logging in...';
-
-                // Find volunteer
-                const query = await db.collection('volunteers')
-                    .where('admissionNumber', '==', admission)
-                    .get();
-
-                if (query.empty) {
-                    throw new Error('Admission number or password is incorrect');
-                }
-
-                const volunteer = query.docs[0];
-                const data = volunteer.data();
-
-                // Verify password
-                const passwordMatch = await verifyPassword(password, data.passwordHash);
-                if (!passwordMatch) {
-                    throw new Error('Admission number or password is incorrect');
-                }
-
-                currentUser = {
-                    id: volunteer.id,
-                    ...data
-                };
-
-                hasPledged = data.pledged || false;
-
-                showNotification('Welcome back!', 'success');
-                setTimeout(() => showDashboard(), 800);
-
-            } catch (error) {
-                showError(errorEl, error.message || 'Login failed');
-            } finally {
-                btn.disabled = false;
-                btnText.innerHTML = 'Login to Dashboard';
+                btnText.innerHTML = 'Join as a Volunteer';
             }
         });
 
         // ============ DASHBOARD FUNCTIONS ============
         async function showDashboard() {
-            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('registrationScreen').style.display = 'none';
             document.getElementById('dashboardScreen').classList.add('active');
             
             // Setup real-time listeners
@@ -987,7 +818,7 @@
                 // Add pledge
                 await db.collection('pledges').add({
                     volunteerId: currentUser.id,
-                    volunteerName: currentUser.name,
+                    volunteerEmail: currentUser.email,
                     pledgedAt: new Date().toISOString()
                 });
 
@@ -1003,26 +834,11 @@
 
                 hasPledged = true;
                 updatePledgeButton();
-                showNotification('Thank you for standing with HEAL!', 'success');
+                showNotification('Thank you for standing with HEAL! 💙', 'success');
 
             } catch (error) {
                 showError(document.getElementById('pledgeMessage'), error.message || 'Failed to submit pledge');
                 document.getElementById('pledgeBtn').disabled = false;
-            }
-        }
-
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                currentUser = null;
-                hasPledged = false;
-                document.getElementById('dashboardScreen').classList.remove('active');
-                document.getElementById('authScreen').style.display = 'block';
-                document.getElementById('loginForm').reset();
-                document.getElementById('registerForm').reset();
-                document.querySelector('.auth-tabs .auth-tab.active').classList.remove('active');
-                document.querySelectorAll('.auth-form.active').forEach(f => f.classList.remove('active'));
-                document.querySelector('.auth-tabs .auth-tab:first-child').classList.add('active');
-                document.getElementById('loginForm').classList.add('active');
             }
         }
 
@@ -1044,6 +860,11 @@
             }, 3000);
         }
 
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
         // Simple password hashing (use bcrypt in production)
         async function hashPassword(password) {
             const encoder = new TextEncoder();
@@ -1051,11 +872,6 @@
             const hashBuffer = await crypto.subtle.digest('SHA-256', data);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        async function verifyPassword(password, hash) {
-            const newHash = await hashPassword(password);
-            return newHash === hash;
         }
 
         // Initialize

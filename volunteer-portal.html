@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEAL Movement - Volunteer Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ============ AUTH SCREEN ============ */
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .auth-header h1 {
+            color: #1E88E5;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .auth-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            color: #999;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            color: #1E88E5;
+            border-bottom-color: #1E88E5;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1E88E5;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #ccc;
+        }
+
+        .password-error {
+            color: #e53935;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============ DASHBOARD SCREEN ============ */
+        .dashboard-container {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .dashboard-container.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .dashboard-title {
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .welcome-emoji {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            color: #1E88E5;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-tagline {
+            display: grid;
+            gap: 10px;
+            color: #999;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .tagline-line {
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .tagline-line:nth-child(1) { animation-delay: 0.1s; }
+        .tagline-line:nth-child(2) { animation-delay: 0.2s; }
+        .tagline-line:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn-join {
+            background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-join:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(30, 136, 229, 0.4);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .stat-card:nth-child(2) { animation-delay: 0.1s; }
+        .stat-card:nth-child(3) { animation-delay: 0.2s; }
+        .stat-card:nth-child(4) { animation-delay: 0.3s; }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            color: #1E88E5;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .counter-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .counter-large {
+            font-size: 72px;
+            font-weight: 700;
+            color: #1E88E5;
+            margin: 20px 0;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .progress-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .progress-label {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #1E88E5 0%, #42A5F5 100%);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .progress-percentage {
+            text-align: right;
+            color: #1E88E5;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .pledge-section {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pledge-title {
+            color: #1E88E5;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .pledge-description {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .btn-pledge {
+            background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+            color: white;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pledge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.4);
+        }
+
+        .btn-pledge.pledged {
+            background: #4CAF50;
+            cursor: default;
+        }
+
+        .btn-pledge.pledged:hover {
+            transform: none;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 30px 20px;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .dashboard-title {
+                font-size: 24px;
+            }
+
+            .welcome-card {
+                padding: 25px;
+            }
+
+            .welcome-title {
+                font-size: 22px;
+            }
+
+            .welcome-subtitle {
+                font-size: 16px;
+            }
+
+            .counter-large {
+                font-size: 48px;
+            }
+
+            .stat-value {
+                font-size: 32px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pledge-section {
+                padding: 20px;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1E88E5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.success {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .notification.error {
+            border-left: 4px solid #e53935;
+        }
+
+        @media (max-width: 640px) {
+            .notification {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="authScreen" class="auth-container">
+        <div class="auth-header">
+            <h1>💙 HEAL Movement</h1>
+            <p>Volunteer Portal</p>
+        </div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+            <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+            <div id="loginError" class="error-message"></div>
+            <div class="form-group">
+                <label for="loginAdmission">Admission Number</label>
+                <input type="text" id="loginAdmission" placeholder="Enter your admission number" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <span id="loginBtnText">Login to Dashboard</span>
+            </button>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="registerForm" class="auth-form">
+            <div id="registerError" class="error-message"></div>
+            <div class="form-group">
+                <label for="registerName">Full Name</label>
+                <input type="text" id="registerName" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="registerAdmission">Admission Number</label>
+                <input type="text" id="registerAdmission" placeholder="Your admission number" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Create Password</label>
+                <input type="password" id="registerPassword" placeholder="Create a strong password" required>
+            </div>
+            <div class="form-group">
+                <label for="registerConfirm">Confirm Password</label>
+                <input type="password" id="registerConfirm" placeholder="Confirm your password" required>
+                <div id="passwordError" class="password-error">Passwords do not match</div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <span id="registerBtnText">Create Account</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="dashboard-title">💙 HEAL Movement Team</div>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+
+        <div class="welcome-card">
+            <div class="welcome-emoji">💙</div>
+            <div class="welcome-title">Welcome to the HEAL Movement Team</div>
+            <div class="welcome-subtitle">You are officially part of the movement.</div>
+            <div class="welcome-tagline">
+                <div class="tagline-line">Together we lead.</div>
+                <div class="tagline-line">Together we inspire.</div>
+                <div class="tagline-line">Together we transform.</div>
+            </div>
+        </div>
+
+        <div class="counter-section">
+            <div class="stat-label">HEAL Movement Volunteers</div>
+            <div class="counter-large" id="volunteerCounter">0</div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-label" id="progressLabel">0 Volunteers</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div class="progress-percentage" id="progressPercentage">0%</div>
+        </div>
+
+        <div class="pledge-section">
+            <div class="pledge-title">Join Our Movement</div>
+            <div class="pledge-description">Stand with HEAL and commit to leading, inspiring, and transforming our community.</div>
+            <button class="btn-pledge" id="pledgeBtn" onclick="submitPledge()">💙 I Stand With HEAL</button>
+            <div id="pledgeMessage" class="success-message"></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Registered Volunteers</div>
+                <div class="stat-value" id="statVolunteers">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Support Pledges</div>
+                <div class="stat-value" id="statPledges">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Campaign Goal</div>
+                <div class="stat-value">500</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Progress</div>
+                <div class="stat-value" id="statProgress">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrO-REPLACED_WITH_YOUR_KEY",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abc123def456"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        // Constants
+        const VOLUNTEER_TARGET = 500;
+        
+        // State
+        let currentUser = null;
+        let hasPledged = false;
+
+        // ============ AUTH FUNCTIONS ============
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab === 'login' ? 'loginForm' : 'registerForm').classList.add('active');
+        }
+
+        document.getElementById('registerPassword').addEventListener('change', validatePasswords);
+        document.getElementById('registerConfirm').addEventListener('keyup', validatePasswords);
+
+        function validatePasswords() {
+            const pwd = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerConfirm').value;
+            const errorEl = document.getElementById('passwordError');
+            
+            if (pwd && confirm && pwd !== confirm) {
+                errorEl.classList.add('show');
+            } else {
+                errorEl.classList.remove('show');
+            }
+        }
+
+        // Register Form
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value.trim();
+            const admission = document.getElementById('registerAdmission').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerConfirm').value;
+            const errorEl = document.getElementById('registerError');
+            const btnText = document.getElementById('registerBtnText');
+            const btn = e.target.querySelector('button');
+
+            errorEl.classList.remove('show');
+            errorEl.innerHTML = '';
+
+            // Validation
+            if (!name || !admission || !password || !confirm) {
+                showError(errorEl, 'All fields are required');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError(errorEl, 'Password must be at least 6 characters');
+                return;
+            }
+
+            if (password !== confirm) {
+                showError(errorEl, 'Passwords do not match');
+                return;
+            }
+
+            try {
+                btn.disabled = true;
+                btnText.innerHTML = '<span class="loading"></span>Creating account...';
+
+                // Check if admission number exists
+                const existingQuery = await db.collection('volunteers')
+                    .where('admissionNumber', '==', admission)
+                    .get();
+
+                if (!existingQuery.empty) {
+                    throw new Error('This admission number is already registered');
+                }
+
+                // Hash password (in production, use proper server-side hashing)
+                const passwordHash = await hashPassword(password);
+
+                // Create volunteer
+                const volunteer = {
+                    name,
+                    admissionNumber: admission,
+                    passwordHash,
+                    joinedAt: new Date().toISOString(),
+                    pledged: false
+                };
+
+                const docRef = await db.collection('volunteers').add(volunteer);
+
+                // Update statistics
+                await updateStatistics(true);
+
+                // Set current user
+                currentUser = {
+                    id: docRef.id,
+                    ...volunteer
+                };
+
+                showNotification('Account created successfully!', 'success');
+                setTimeout(() => showDashboard(), 1000);
+
+            } catch (error) {
+                showError(errorEl, error.message || 'Registration failed');
+            } finally {
+                btn.disabled = false;
+                btnText.innerHTML = 'Create Account';
+            }
+        });
+
+        // Login Form
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const admission = document.getElementById('loginAdmission').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorEl = document.getElementById('loginError');
+            const btnText = document.getElementById('loginBtnText');
+            const btn = e.target.querySelector('button');
+
+            errorEl.classList.remove('show');
+            errorEl.innerHTML = '';
+
+            if (!admission || !password) {
+                showError(errorEl, 'Please enter both admission number and password');
+                return;
+            }
+
+            try {
+                btn.disabled = true;
+                btnText.innerHTML = '<span class="loading"></span>Logging in...';
+
+                // Find volunteer
+                const query = await db.collection('volunteers')
+                    .where('admissionNumber', '==', admission)
+                    .get();
+
+                if (query.empty) {
+                    throw new Error('Admission number or password is incorrect');
+                }
+
+                const volunteer = query.docs[0];
+                const data = volunteer.data();
+
+                // Verify password
+                const passwordMatch = await verifyPassword(password, data.passwordHash);
+                if (!passwordMatch) {
+                    throw new Error('Admission number or password is incorrect');
+                }
+
+                currentUser = {
+                    id: volunteer.id,
+                    ...data
+                };
+
+                hasPledged = data.pledged || false;
+
+                showNotification('Welcome back!', 'success');
+                setTimeout(() => showDashboard(), 800);
+
+            } catch (error) {
+                showError(errorEl, error.message || 'Login failed');
+            } finally {
+                btn.disabled = false;
+                btnText.innerHTML = 'Login to Dashboard';
+            }
+        });
+
+        // ============ DASHBOARD FUNCTIONS ============
+        async function showDashboard() {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').classList.add('active');
+            
+            // Setup real-time listeners
+            setupRealtimeUpdates();
+            updatePledgeButton();
+        }
+
+        function setupRealtimeUpdates() {
+            // Listen to statistics
+            db.collection('statistics').doc('main').onSnapshot((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    updateStatisticsDisplay(data.volunteerCount || 0, data.pledgeCount || 0);
+                }
+            });
+
+            // Listen to pledges
+            if (currentUser) {
+                db.collection('pledges')
+                    .where('volunteerId', '==', currentUser.id)
+                    .onSnapshot((snapshot) => {
+                        hasPledged = !snapshot.empty;
+                        updatePledgeButton();
+                    });
+            }
+        }
+
+        function updateStatisticsDisplay(volunteerCount, pledgeCount) {
+            // Update counters
+            animateCounter('volunteerCounter', volunteerCount);
+            
+            // Update progress
+            const percentage = Math.min((volunteerCount / VOLUNTEER_TARGET) * 100, 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            
+            document.getElementById('progressLabel').textContent = `${volunteerCount} Volunteers`;
+            document.getElementById('progressPercentage').textContent = percentage.toFixed(1) + '%';
+            
+            // Update stats
+            document.getElementById('statVolunteers').textContent = volunteerCount;
+            document.getElementById('statPledges').textContent = pledgeCount;
+            document.getElementById('statProgress').textContent = percentage.toFixed(1) + '%';
+        }
+
+        function animateCounter(elementId, newValue) {
+            const element = document.getElementById(elementId);
+            const currentValue = parseInt(element.textContent);
+            
+            if (currentValue === newValue) return;
+            
+            const diff = newValue - currentValue;
+            const step = diff > 0 ? 1 : -1;
+            const steps = Math.abs(diff);
+            const stepDuration = 30;
+
+            let current = currentValue;
+            const interval = setInterval(() => {
+                current += step;
+                element.textContent = current;
+                
+                if (current === newValue) {
+                    clearInterval(interval);
+                }
+            }, stepDuration);
+        }
+
+        async function updateStatistics(increment = false) {
+            try {
+                const statsRef = db.collection('statistics').doc('main');
+                const doc = await statsRef.get();
+
+                if (doc.exists) {
+                    await statsRef.update({
+                        volunteerCount: increment ? 
+                            firebase.firestore.FieldValue.increment(1) : 
+                            firebase.firestore.FieldValue.increment(0)
+                    });
+                } else {
+                    await statsRef.set({
+                        volunteerCount: increment ? 1 : 0,
+                        pledgeCount: 0,
+                        target: VOLUNTEER_TARGET
+                    });
+                }
+            } catch (error) {
+                console.error('Error updating statistics:', error);
+            }
+        }
+
+        function updatePledgeButton() {
+            const btn = document.getElementById('pledgeBtn');
+            if (hasPledged) {
+                btn.classList.add('pledged');
+                btn.textContent = '✓ You Pledged Your Support';
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('pledged');
+                btn.textContent = '💙 I Stand With HEAL';
+                btn.disabled = false;
+            }
+        }
+
+        async function submitPledge() {
+            if (!currentUser || hasPledged) return;
+
+            try {
+                const pledgeBtn = document.getElementById('pledgeBtn');
+                pledgeBtn.disabled = true;
+
+                // Add pledge
+                await db.collection('pledges').add({
+                    volunteerId: currentUser.id,
+                    volunteerName: currentUser.name,
+                    pledgedAt: new Date().toISOString()
+                });
+
+                // Update volunteer record
+                await db.collection('volunteers').doc(currentUser.id).update({
+                    pledged: true
+                });
+
+                // Update statistics
+                await db.collection('statistics').doc('main').update({
+                    pledgeCount: firebase.firestore.FieldValue.increment(1)
+                });
+
+                hasPledged = true;
+                updatePledgeButton();
+                showNotification('Thank you for standing with HEAL!', 'success');
+
+            } catch (error) {
+                showError(document.getElementById('pledgeMessage'), error.message || 'Failed to submit pledge');
+                document.getElementById('pledgeBtn').disabled = false;
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                currentUser = null;
+                hasPledged = false;
+                document.getElementById('dashboardScreen').classList.remove('active');
+                document.getElementById('authScreen').style.display = 'block';
+                document.getElementById('loginForm').reset();
+                document.getElementById('registerForm').reset();
+                document.querySelector('.auth-tabs .auth-tab.active').classList.remove('active');
+                document.querySelectorAll('.auth-form.active').forEach(f => f.classList.remove('active'));
+                document.querySelector('.auth-tabs .auth-tab:first-child').classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            }
+        }
+
+        // ============ UTILITY FUNCTIONS ============
+        function showError(element, message) {
+            element.textContent = message;
+            element.classList.add('show');
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Simple password hashing (use bcrypt in production)
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function verifyPassword(password, hash) {
+            const newHash = await hashPassword(password);
+            return newHash === hash;
+        }
+
+        // Initialize
+        window.addEventListener('load', async () => {
+            try {
+                await updateStatistics(false);
+            } catch (error) {
+                console.log('Initial load ready');
+            }
+        });
+    </script>
+</body>
+</html>

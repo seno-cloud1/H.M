@@ -163,13 +163,24 @@ background-color: var(--bg-dark);
 
 .countdown h2 {
 color: var(--text-dark);
+font-size: 40px;
+margin-bottom: 30px;
+}
+
+.countdown h1 {
+font-size: 60px;
+color: var(--gold);
+margin-bottom: 30px;
+font-weight: bold;
 }
 
 #timer{
-font-size:45px;
+font-size:48px;
 font-weight:bold;
 color: var(--gold);
 margin-top:20px;
+letter-spacing: 3px;
+text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .welcome{
@@ -674,6 +685,10 @@ font-size: 12px;
 font-size: 16px;
 min-height: 100px;
 }
+
+#timer {
+font-size: 32px;
+}
 }
 </style>
 
@@ -747,6 +762,17 @@ Read Our Manifesto
 <img src="poster.png" alt="Campaign Poster">
 
 </div>
+
+</section>
+
+<!-- COUNTDOWN SECTION -->
+<section class="countdown">
+
+<h2>⏰ Election Day Countdown</h2>
+
+<h1>31 July 2026</h1>
+
+<div id="timer"></div>
 
 </section>
 
@@ -1101,6 +1127,32 @@ const currentTheme = body.classList.contains('light-mode') ? 'light-mode' : '';
 localStorage.setItem('theme', currentTheme);
 themeToggle.textContent = currentTheme ? '☀️ Light' : '🌙 Dark';
 });
+
+// Countdown Timer
+function updateCountdown() {
+const targetDate = new Date('2026-07-31T00:00:00').getTime();
+const timerInterval = setInterval(() => {
+const now = new Date().getTime();
+const distance = targetDate - now;
+
+const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+const timerElement = document.getElementById('timer');
+if (timerElement) {
+timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+if (distance < 0) {
+clearInterval(timerInterval);
+timerElement.innerHTML = "🎉 The elections have begun! 🎉";
+}
+}, 1000);
+}
+
+updateCountdown();
 
 // Typing Animation for Manifesto
 let typingInProgress = false;

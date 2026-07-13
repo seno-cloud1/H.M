@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="HEAL Movement - SLCMC SRC Elections 2026/2027. A modern and responsive election campaign website featuring manifesto, and voting information.">
-<meta name="keywords" content="HEAL Movement, Elections, SLCMC SRC, Leadership, Health, Empowerment, Advocacy">
+<meta name="description" content="HEAL Movement - SLCMC SRC Elections 2026/2027. A modern and responsive election campaign website featuring candidate profiles, manifesto, and voting information.">
+<meta name="keywords" content="HEAL Movement, Elections, SLCMC SRC, Candidates, Leadership, Health, Empowerment, Advocacy">
 <meta name="author" content="HEAL Movement">
 <title>HEAL Movement | SLCMC SRC Elections 2026/2027</title>
 
@@ -202,6 +202,72 @@ margin-bottom:40px;
 color: var(--text-dark);
 }
 
+/* CANDIDATES SECTION */
+.candidates-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+gap:30px;
+padding:80px;
+max-width:1200px;
+margin:auto;
+background-color: var(--bg-dark);
+}
+
+.candidate-card{
+background: var(--card-dark);
+border:2px solid var(--gold);
+border-radius:15px;
+overflow:hidden;
+transition:all 0.3s;
+box-shadow:0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+.candidate-card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 40px rgba(212, 175, 55, 0.6);
+}
+
+.candidate-image{
+width:100%;
+height:350px;
+object-fit:cover;
+}
+
+.candidate-info{
+padding:30px;
+text-align:center;
+}
+
+.candidate-info h3{
+font-size:28px;
+color: var(--gold);
+margin-bottom:15px;
+}
+
+.candidate-info p{
+font-size:16px;
+color: var(--text-dark);
+line-height:1.6;
+margin-bottom:20px;
+}
+
+.candidate-role{
+font-size:18px;
+font-weight:bold;
+color: var(--gold);
+margin-bottom:15px;
+display:block;
+}
+
+.candidate-quote{
+font-style:italic;
+color:#aaa;
+font-size:14px;
+border-left:3px solid var(--gold);
+padding-left:15px;
+margin-top:15px;
+}
+
 /* MANIFESTO TYPING ANIMATION SECTION */
 .manifesto-section {
 padding: 100px 80px;
@@ -295,6 +361,58 @@ font-size: 18px;
 color: var(--text-dark);
 font-size: 14px;
 margin-top: 8px;
+}
+
+/* GALLERY SECTION - POSTER AND PROFILES BELOW */
+.gallery-section{
+padding:80px;
+text-align:center;
+background-color: var(--bg-dark);
+}
+
+.gallery-section h2{
+font-size:50px;
+color: var(--gold);
+margin-bottom:40px;
+}
+
+.poster-container{
+margin-bottom:60px;
+}
+
+.poster-container img{
+max-width:100%;
+height:auto;
+border-radius:15px;
+box-shadow:0 0 40px rgba(212, 175, 55, 0.5);
+max-height:600px;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.gallery-item{
+position:relative;
+overflow:hidden;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(212, 175, 55, 0.3);
+transition:all 0.3s;
+}
+
+.gallery-item:hover{
+transform:scale(1.05);
+box-shadow:0 10px 30px rgba(212, 175, 55, 0.6);
+}
+
+.gallery-item img{
+width:100%;
+height:300px;
+object-fit:cover;
 }
 
 /* VOTING INSTRUCTIONS */
@@ -545,7 +663,9 @@ width:100%;
 max-width:400px;
 }
 
+.candidates-container,
 .manifesto-section,
+.gallery-section,
 .contact-section {
 padding:40px 20px;
 }
@@ -672,6 +792,97 @@ innovation,
 transparency and servant leadership.
 
 </p>
+
+</section>
+
+<!-- CANDIDATES SECTION -->
+<section id="candidates">
+
+<div class="welcome">
+<h2>Our Candidates</h2>
+<p>Meet the dedicated candidates running under the HEAL Movement banner. Each candidate is committed to serving the student community with integrity and passion.</p>
+</div>
+
+<div class="candidates-container">
+
+<!-- CALISTUS -->
+<div class="candidate-card">
+<img src="CALISTUS.jpg" alt="Calistus" class="candidate-image">
+<div class="candidate-info">
+<h3>CALISTUS KHAMASI PEMBE</h3>
+<span class="candidate-role">President</span>
+<p>Visionary leader committed to driving positive change and fostering unity within the student community.</p>
+<div class="candidate-quote">"Together, we rise. Together, we lead."</div>
+</div>
+</div>
+
+<!-- OCHIENG -->
+<div class="candidate-card">
+<img src="OCHIENG.jpg" alt="Ochieng" class="candidate-image">
+<div class="candidate-info">
+<h3>OCHIENG DAVID</h3>
+<span class="candidate-role">Vice President</span>
+<p>Passionate advocate for student welfare, dedicated to ensuring every voice is heard and valued.</p>
+<div class="candidate-quote">"Empowerment through representation."</div>
+</div>
+</div>
+
+<!-- ELIZABETH -->
+<div class="candidate-card">
+<img src="ELIZABETH.jpg" alt="Elizabeth" class="candidate-image">
+<div class="candidate-info">
+<h3>ELIZABETH MBONE</h3>
+<span class="candidate-role">Secretary General</span>
+<p>Organized and detail-oriented, committed to transparent communication and efficient administration.</p>
+<div class="candidate-quote">"Clear communication, strong leadership."</div>
+</div>
+</div>
+
+<!-- MARKOSE -->
+<div class="candidate-card">
+<img src="MARKOSE.jpg" alt="Markose" class="candidate-image">
+<div class="candidate-info">
+<h3>MARKOSE KAMAU</h3>
+<span class="candidate-role">Secretary of Sports & Entertainment</span>
+<p>Sports enthusiast promoting student wellness, team spirit, and active lifestyle for all.</p>
+<div class="candidate-quote">"Healthy students, thriving community."</div>
+</div>
+</div>
+
+<!-- LINDSY -->
+<div class="candidate-card">
+<img src="LINDSY.jpg" alt="Lindsy" class="candidate-image">
+<div class="candidate-info">
+<h3>LINDSY NJERI GATHUA</h3>
+<span class="candidate-role">Secretary Liturgy & Spiritual Affairs</span>
+<p>Dedicated to improving student spiritual life, advocating for holistic development and well-being.</p>
+<div class="candidate-quote">"Spirituality and unity drive us forward."</div>
+</div>
+</div>
+
+<!-- TAVIN -->
+<div class="candidate-card">
+<img src="TAVIN.jpg" alt="Tavin" class="candidate-image">
+<div class="candidate-info">
+<h3>TAVIN MAINA</h3>
+<span class="candidate-role">Secretary Academics</span>
+<p>Academic advocate committed to promoting excellence, learning innovation, and student achievement.</p>
+<div class="candidate-quote">"Academic excellence for all."</div>
+</div>
+</div>
+
+<!-- MUTABARI -->
+<div class="candidate-card">
+<img src="MUTABARI.jpg" alt="Mutabari" class="candidate-image">
+<div class="candidate-info">
+<h3>IDAH MUTABARI</h3>
+<span class="candidate-role">Catering & Accommodations</span>
+<p>Dedicated to ensuring student comfort and welfare through quality catering and accommodation services.</p>
+<div class="candidate-quote">"Student comfort, our priority."</div>
+</div>
+</div>
+
+</div>
 
 </section>
 

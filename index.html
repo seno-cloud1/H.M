@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HEAL Movement - SLCMC SRC Elections 2026/2027. A modern and responsive election campaign website featuring candidate profiles, manifesto, and voting information.">
+<meta name="keywords" content="HEAL Movement, Elections, SLCMC SRC, Candidates, Leadership, Health, Empowerment, Advocacy">
+<meta name="author" content="HEAL Movement">
+<title>HEAL Movement | SLCMC SRC Elections 2026/2027</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+:root {
+--bg-dark: #2f0147;
+--bg-light: #f5f5f5;
+--accent-dark: #42005f;
+--accent-light: #e8e8e8;
+--text-dark: white;
+--text-light: #333;
+--gold: gold;
+--card-dark: linear-gradient(135deg, #42005f, #2f0147);
+--card-light: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+}
+
+body{
+background-color: var(--bg-dark);
+color: var(--text-dark);
+transition: all 0.3s ease;
+}
+
+body.light-mode {
+--bg-dark: #f5f5f5;
+--text-dark: #333;
+--accent-dark: #e8e8e8;
+--accent-light: #42005f;
+}
+
+.theme-toggle {
+position: fixed;
+top: 20px;
+right: 20px;
+z-index: 1000;
+background: var(--gold);
+border: none;
+padding: 10px 15px;
+border-radius: 50px;
+cursor: pointer;
+font-weight: bold;
+color: var(--bg-dark);
+transition: all 0.3s;
+box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+.theme-toggle:hover {
+transform: scale(1.1);
+box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background: var(--accent-dark);
+position:sticky;
+top:0;
+z-index:100;
+transition: all 0.3s;
+}
+
+.logo{
+font-size:30px;
+font-weight:bold;
+color: var(--gold);
+}
+
+.navbar ul{
+display:flex;
+list-style:none;
+}
+
+.navbar li{
+margin-left:30px;
+}
+
+.navbar a{
+color: var(--text-dark);
+text-decoration:none;
+font-weight:600;
+transition:color 0.3s;
+}
+
+.navbar a:hover{
+color: var(--gold);
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:80px;
+background-color: var(--bg-dark);
+transition: all 0.3s;
+}
+
+.hero-text{
+width:50%;
+}
+
+.hero-text h1{
+font-size:70px;
+color: var(--gold);
+margin:20px 0;
+}
+
+.hero-text h2{
+font-size:30px;
+margin-bottom:20px;
+color: var(--text-dark);
+}
+
+.hero-text p{
+font-size:20px;
+margin-bottom:30px;
+color: var(--text-dark);
+}
+
+.btn{
+background: var(--gold);
+color: var(--bg-dark);
+padding:15px 35px;
+border-radius:40px;
+text-decoration:none;
+font-weight:bold;
+transition:all 0.3s;
+display:inline-block;
+border: none;
+cursor: pointer;
+}
+
+.btn:hover{
+background:white;
+transform:scale(1.05);
+}
+
+.hero-image img{
+width:500px;
+border-radius:20px;
+box-shadow:0 0 40px var(--gold);
+}
+
+.countdown{
+text-align:center;
+padding:80px;
+background-color: var(--bg-dark);
+}
+
+.countdown h2 {
+color: var(--text-dark);
+}
+
+#timer{
+font-size:45px;
+font-weight:bold;
+color: var(--gold);
+margin-top:20px;
+}
+
+.welcome{
+padding:80px;
+text-align:center;
+max-width:1000px;
+margin:auto;
+line-height:1.8;
+background-color: var(--bg-dark);
+}
+
+.welcome h2{
+font-size:50px;
+color: var(--gold);
+margin-bottom:40px;
+}
+
+.welcome p {
+color: var(--text-dark);
+}
+
+/* CANDIDATES SECTION */
+.candidates-container{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+gap:30px;
+padding:80px;
+max-width:1200px;
+margin:auto;
+background-color: var(--bg-dark);
+}
+
+.candidate-card{
+background: var(--card-dark);
+border:2px solid var(--gold);
+border-radius:15px;
+overflow:hidden;
+transition:all 0.3s;
+box-shadow:0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+.candidate-card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 40px rgba(212, 175, 55, 0.6);
+}
+
+.candidate-image{
+width:100%;
+height:350px;
+object-fit:cover;
+}
+
+.candidate-info{
+padding:30px;
+text-align:center;
+}
+
+.candidate-info h3{
+font-size:28px;
+color: var(--gold);
+margin-bottom:15px;
+}
+
+.candidate-info p{
+font-size:16px;
+color: var(--text-dark);
+line-height:1.6;
+margin-bottom:20px;
+}
+
+.candidate-role{
+font-size:18px;
+font-weight:bold;
+color: var(--gold);
+margin-bottom:15px;
+display:block;
+}
+
+.candidate-quote{
+font-style:italic;
+color:#aaa;
+font-size:14px;
+border-left:3px solid var(--gold);
+padding-left:15px;
+margin-top:15px;
+}
+
+/* TESTIMONIALS SECTION */
+.testimonials-section {
+padding: 80px;
+background-color: var(--bg-dark);
+text-align: center;
+}
+
+.testimonials-section h2 {
+font-size: 50px;
+color: var(--gold);
+margin-bottom: 50px;
+}
+
+.testimonials-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+max-width: 1200px;
+margin: auto;
+}
+
+.testimonial-card {
+background: var(--card-dark);
+border: 2px solid var(--gold);
+border-radius: 15px;
+padding: 30px;
+box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+transition: all 0.3s;
+}
+
+.testimonial-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+}
+
+.testimonial-text {
+font-size: 16px;
+color: var(--text-dark);
+margin-bottom: 20px;
+line-height: 1.8;
+font-style: italic;
+}
+
+.testimonial-author {
+font-weight: bold;
+color: var(--gold);
+font-size: 16px;
+margin-bottom: 5px;
+}
+
+.testimonial-role {
+color: #aaa;
+font-size: 14px;
+}
+
+.stars {
+color: var(--gold);
+font-size: 18px;
+margin-bottom: 15px;
+}
+
+/* GALLERY SECTION - POSTER AND PROFILES BELOW */
+.gallery-section{
+padding:80px;
+text-align:center;
+background-color: var(--bg-dark);
+}
+
+.gallery-section h2{
+font-size:50px;
+color: var(--gold);
+margin-bottom:40px;
+}
+
+.poster-container{
+margin-bottom:60px;
+}
+
+.poster-container img{
+max-width:100%;
+height:auto;
+border-radius:15px;
+box-shadow:0 0 40px rgba(212, 175, 55, 0.5);
+max-height:600px;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.gallery-item{
+position:relative;
+overflow:hidden;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(212, 175, 55, 0.3);
+transition:all 0.3s;
+}
+
+.gallery-item:hover{
+transform:scale(1.05);
+box-shadow:0 10px 30px rgba(212, 175, 55, 0.6);
+}
+
+.gallery-item img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+/* VOTING INSTRUCTIONS */
+.voting-section {
+padding: 80px;
+background-color: var(--bg-dark);
+text-align: center;
+}
+
+.voting-section h2 {
+font-size: 50px;
+color: var(--gold);
+margin-bottom: 40px;
+}
+
+.voting-container {
+max-width: 800px;
+margin: auto;
+background: var(--card-dark);
+border: 2px solid var(--gold);
+border-radius: 15px;
+padding: 40px;
+}
+
+.voting-step {
+margin-bottom: 30px;
+text-align: left;
+}
+
+.voting-step h3 {
+color: var(--gold);
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+.voting-step p {
+color: var(--text-dark);
+line-height: 1.8;
+}
+
+.voting-date {
+font-size: 24px;
+color: var(--gold);
+font-weight: bold;
+margin-top: 30px;
+padding-top: 30px;
+border-top: 2px solid var(--gold);
+}
+
+/* FAQ SECTION */
+.faq-section {
+padding: 80px;
+background-color: var(--bg-dark);
+}
+
+.faq-section h2 {
+font-size: 50px;
+color: var(--gold);
+margin-bottom: 50px;
+text-align: center;
+}
+
+.faq-container {
+max-width: 900px;
+margin: auto;
+}
+
+.faq-item {
+margin-bottom: 20px;
+background: var(--card-dark);
+border: 2px solid var(--gold);
+border-radius: 10px;
+overflow: hidden;
+}
+
+.faq-question {
+padding: 20px;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: var(--gold);
+font-weight: bold;
+transition: all 0.3s;
+}
+
+.faq-question:hover {
+background-color: rgba(212, 175, 55, 0.1);
+}
+
+.faq-answer {
+padding: 0 20px;
+max-height: 0;
+overflow: hidden;
+color: var(--text-dark);
+transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+padding: 20px;
+max-height: 300px;
+}
+
+.faq-toggle {
+font-size: 20px;
+transition: transform 0.3s;
+}
+
+.faq-item.active .faq-toggle {
+transform: rotate(180deg);
+}
+
+/* CONTACT SECTION */
+.contact-section{
+padding:80px;
+max-width:800px;
+margin:auto;
+text-align:center;
+background-color: var(--bg-dark);
+}
+
+.contact-section h2{
+font-size:50px;
+color: var(--gold);
+margin-bottom:40px;
+}
+
+.contact-info{
+background: var(--card-dark);
+border:2px solid var(--gold);
+border-radius:15px;
+padding:40px;
+margin-bottom:30px;
+}
+
+.contact-info p{
+font-size:18px;
+margin-bottom:20px;
+color: var(--text-dark);
+}
+
+.contact-info strong{
+color: var(--gold);
+}
+
+.contact-link{
+color: var(--gold);
+text-decoration:none;
+font-weight:bold;
+transition:all 0.3s;
+}
+
+.contact-link:hover{
+color:white;
+text-decoration:underline;
+}
+
+.contact-form {
+background: var(--card-dark);
+border: 2px solid var(--gold);
+border-radius: 15px;
+padding: 40px;
+margin-top: 30px;
+}
+
+.contact-form h3 {
+color: var(--gold);
+margin-bottom: 20px;
+}
+
+.form-group {
+margin-bottom: 20px;
+text-align: left;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 8px;
+color: var(--gold);
+font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 12px;
+border: 2px solid var(--gold);
+border-radius: 8px;
+background-color: rgba(255,255,255,0.1);
+color: var(--text-dark);
+font-family: Poppins, sans-serif;
+transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+outline: none;
+background-color: rgba(255,255,255,0.2);
+box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.form-group textarea {
+resize: vertical;
+min-height: 120px;
+}
+
+.submit-btn {
+background: var(--gold);
+color: var(--bg-dark);
+padding: 12px 30px;
+border: none;
+border-radius: 8px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.submit-btn:hover {
+transform: scale(1.05);
+box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+footer{
+background:#1d012d;
+text-align:center;
+padding:30px;
+margin-top:80px;
+color: var(--text-dark);
+}
+
+@media (max-width:768px){
+.hero{
+flex-direction:column;
+padding:40px;
+}
+
+.hero-text{
+width:100%;
+margin-bottom:40px;
+}
+
+.hero-text h1{
+font-size:45px;
+}
+
+.hero-image img{
+width:100%;
+max-width:400px;
+}
+
+.candidates-container,
+.testimonials-container,
+.gallery-section,
+.contact-section {
+padding:40px 20px;
+}
+
+.theme-toggle {
+top: 80px;
+right: 10px;
+padding: 8px 12px;
+font-size: 12px;
+}
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+
+</head>
+
+<body>
+
+<!-- THEME TOGGLE BUTTON -->
+<button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+HEAL MOVEMENT
+</div>
+
+<ul>
+
+<li><a href="#home">Home</a></li>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#candidates">Candidates</a></li>
+
+<li><a href="#testimonials">Testimonials</a></li>
+
+<li><a href="#voting">Voting</a></li>
+
+<li><a href="#faq">FAQ</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<!-- HOME SECTION -->
+<section class="hero" id="home">
+
+<div class="hero-text">
+
+<h3>SLCMC SRC ELECTIONS 2026/2027</h3>
+
+<h1>HEAL MOVEMENT</h1>
+
+<h2>Health • Empowerment • Advocacy • Leadership</h2>
+
+<p>
+
+Every Voice Counts. Every Student Matters.
+
+</p>
+
+<a href="#manifesto" class="btn">
+
+Read Our Manifesto
+
+</a>
+
+</div>
+
+<div class="hero-image">
+
+<img src="poster.png" alt="Campaign Poster">
+
+</div>
+
+</section>
+
+<!-- COUNTDOWN SECTION -->
+<section class="countdown">
+
+<h2>Election Day</h2>
+
+<h1>31 July 2026</h1>
+
+<div id="timer"></div>
+
+</section>
+
+<!-- WELCOME SECTION -->
+<section class="welcome" id="about">
+
+<h2>Welcome to the HEAL Movement</h2>
+
+<p>
+
+Together we are building a stronger student community through
+Health, Empowerment, Advocacy and Leadership.
+
+We believe every student deserves quality representation,
+academic excellence,
+mental wellness,
+sports development,
+innovation,
+transparency and servant leadership.
+
+</p>
+
+</section>
+
+<!-- CANDIDATES SECTION -->
+<section id="candidates">
+
+<div class="welcome">
+<h2>Our Candidates</h2>
+<p>Meet the dedicated candidates running under the HEAL Movement banner. Each candidate is committed to serving the student community with integrity and passion.</p>
+</div>
+
+<div class="candidates-container">
+
+<!-- CALISTUS -->
+<div class="candidate-card">
+<img src="CALISTUS.jpg" alt="Calistus" class="candidate-image">
+<div class="candidate-info">
+<h3>CALISTUS</h3>
+<span class="candidate-role">Presidential Candidate</span>
+<p>Visionary leader committed to driving positive change and fostering unity within the student community.</p>
+<div class="candidate-quote">"Together, we rise. Together, we lead."</div>
+</div>
+</div>
+
+<!-- ELIZABETH -->
+<div class="candidate-card">
+<img src="ELIZABETH.jpg" alt="Elizabeth" class="candidate-image">
+<div class="candidate-info">
+<h3>ELIZABETH</h3>
+<span class="candidate-role">Vice President Candidate</span>
+<p>Passionate advocate for student welfare, dedicated to ensuring every voice is heard and valued.</p>
+<div class="candidate-quote">"Empowerment through representation."</div>
+</div>
+</div>
+
+<!-- LINDSY -->
+<div class="candidate-card">
+<img src="LINDSY.jpg" alt="Lindsy" class="candidate-image">
+<div class="candidate-info">
+<h3>LINDSY</h3>
+<span class="candidate-role">Secretary Candidate</span>
+<p>Organized and detail-oriented, committed to transparent communication and efficient administration.</p>
+<div class="candidate-quote">"Clear communication, strong leadership."</div>
+</div>
+</div>
+
+<!-- MARKOSE -->
+<div class="candidate-card">
+<img src="MARKOSE.jpg" alt="Markose" class="candidate-image">
+<div class="candidate-info">
+<h3>MARKOSE</h3>
+<span class="candidate-role">Treasurer Candidate</span>
+<p>Financial steward dedicated to responsible budget management and accountability in resource allocation.</p>
+<div class="candidate-quote">"Financial integrity, student prosperity."</div>
+</div>
+</div>
+
+<!-- MUTABARI -->
+<div class="candidate-card">
+<img src="MUTABARI.jpg" alt="Mutabari" class="candidate-image">
+<div class="candidate-info">
+<h3>MUTABARI</h3>
+<span class="candidate-role">Sports & Recreation Officer</span>
+<p>Sports enthusiast promoting student wellness, team spirit, and active lifestyle for all.</p>
+<div class="candidate-quote">"Healthy students, thriving community."</div>
+</div>
+</div>
+
+<!-- OCHIENG -->
+<div class="candidate-card">
+<img src="OCHIENG.jpg" alt="Ochieng" class="candidate-image">
+<div class="candidate-info">
+<h3>OCHIENG</h3>
+<span class="candidate-role">Student Affairs Officer</span>
+<p>Dedicated to improving student life, advocating for academic support and holistic development.</p>
+<div class="candidate-quote">"Student success is our mission."</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section" id="testimonials">
+<h2>What Students Say</h2>
+<div class="testimonials-container">
+
+<div class="testimonial-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p class="testimonial-text">"The HEAL Movement truly listens to students. Their commitment to health and wellness is inspiring. We need leaders like this!"</p>
+<p class="testimonial-author">Sarah Johnson</p>
+<p class="testimonial-role">3rd Year Student, Engineering</p>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p class="testimonial-text">"What impressed me most is their transparency and dedication. The candidates genuinely care about improving our student life."</p>
+<p class="testimonial-author">Michael Kipchoge</p>
+<p class="testimonial-role">2nd Year Student, Business</p>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p class="testimonial-text">"Finally, a movement that addresses mental health, sports, and academics equally. They represent what we've been asking for!"</p>
+<p class="testimonial-author">Faith Kiplagat</p>
+<p class="testimonial-role">4th Year Student, Medicine</p>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p class="testimonial-text">"The energy and vision of the HEAL Movement team is contagious. They've already made a real difference on campus."</p>
+<p class="testimonial-author">David Owuor</p>
+<p class="testimonial-role">1st Year Student, Law</p>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p class="testimonial-text">"Servant leadership in action. The HEAL Movement candidates have consistently shown up for students. They deserve our vote."</p>
+<p class="testimonial-author">Grace Mwangi</p>
+<p class="testimonial-role">Final Year Student, Science</p>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<p class="testimonial-text">"Their manifesto isn't just words—they're already implementing it. Leadership like this is exactly what SLCMC needs."</p>
+<p class="testimonial-author">James Okoro</p>
+<p class="testimonial-role">Student Council Member</p>
+</div>
+
+</div>
+</section>
+
+<!-- MANIFESTO SECTION -->
+<section class="welcome" id="manifesto">
+
+<h2>Our Manifesto</h2>
+
+<p><strong>Health:</strong> We are committed to promoting physical, mental, and emotional wellness for all students.</p>
+
+<p><strong>Empowerment:</strong> We believe in giving students the tools and platforms to voice their opinions and make decisions that affect their lives.</p>
+
+<p><strong>Advocacy:</strong> We stand up for student rights and work to address the challenges facing our community.</p>
+
+<p><strong>Leadership:</strong> We foster transparent, accountable, and servant leadership that puts students first.</p>
+
+</section>
+
+<!-- VOTING INSTRUCTIONS SECTION -->
+<section class="voting-section" id="voting">
+<h2>How to Vote</h2>
+<div class="voting-container">
+<div class="voting-step">
+<h3>📅 Step 1: Mark Your Calendar</h3>
+<p>Elections are scheduled for <strong>31 July 2026</strong>. Make sure you're on campus on election day!</p>
+</div>
+
+<div class="voting-step">
+<h3>📋 Step 2: Check Your Eligibility</h3>
+<p>Ensure you're a registered SLCMC student with a valid student ID. Visit the election office if you have questions.</p>
+</div>
+
+<div class="voting-step">
+<h3>🗳️ Step 3: Cast Your Vote</h3>
+<p>Come to the designated voting centers on campus. One student = One vote. Your vote matters!</p>
+</div>
+
+<div class="voting-step">
+<h3>✅ Step 4: Support HEAL Movement</h3>
+<p>Choose HEAL Movement candidates who are committed to your health, empowerment, advocacy, and leadership.</p>
+</div>
+
+<div class="voting-date">
+📍 Election Day: 31 July 2026
+<br>
+🕐 Voting Hours: 9:00 AM - 5:00 PM
+</div>
+</div>
+</section>
+
+<!-- GALLERY SECTION WITH POSTER AND PROFILES -->
+<section class="gallery-section" id="gallery">
+
+<h2>Campaign Gallery</h2>
+
+<div class="poster-container">
+<h3 style="color:gold; margin-bottom:30px; font-size:32px;">Official Campaign Poster</h3>
+<img src="poster.png" alt="Campaign Poster">
+</div>
+
+<h3 style="color:gold; margin-bottom:30px; font-size:32px; margin-top:60px;">Our Candidates</h3>
+
+<div class="gallery-grid">
+<div class="gallery-item">
+<img src="CALISTUS.jpg" alt="Calistus">
+</div>
+<div class="gallery-item">
+<img src="ELIZABETH.jpg" alt="Elizabeth">
+</div>
+<div class="gallery-item">
+<img src="LINDSY.jpg" alt="Lindsy">
+</div>
+<div class="gallery-item">
+<img src="MARKOSE.jpg" alt="Markose">
+</div>
+<div class="gallery-item">
+<img src="MUTABARI.jpg" alt="Mutabari">
+</div>
+<div class="gallery-item">
+<img src="OCHIENG.jpg" alt="Ochieng">
+</div>
+</div>
+
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section" id="faq">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-container">
+
+<div class="faq-item">
+<div class="faq-question">
+<span>What is the HEAL Movement about?</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p>The HEAL Movement is built on four core principles: Health (physical, mental, and emotional wellness), Empowerment (giving students a voice), Advocacy (standing up for student rights), and Leadership (transparent and accountable leadership). We are committed to building a stronger student community through these values.</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+<span>When are the elections?</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p>The SLCMC SRC Elections are scheduled for <strong>31 July 2026</strong>. Voting will take place from 9:00 AM to 5:00 PM at designated voting centers on campus.</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+<span>Who can vote?</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p>Any registered SLCMC student with a valid student ID is eligible to vote. If you're unsure about your registration status, please contact the election office before the voting date.</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+<span>What are the candidate positions?</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p>The HEAL Movement candidates are running for the following positions: President (Calistus), Vice President (Elizabeth), Secretary (Lindsy), Treasurer (Markose), Sports & Recreation Officer (Mutabari), and Student Affairs Officer (Ochieng).</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+<span>How can I support the HEAL Movement?</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p>You can support the HEAL Movement by voting on election day, sharing our manifesto with other students, attending campaign events, and spreading the word about our commitment to student welfare and leadership. Every voice counts!</p>
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+<span>What makes HEAL Movement different?</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p>The HEAL Movement stands out because we address student needs holistically—from mental health to academic excellence to sports development. We prioritize transparency, accountability, and servant leadership. Our candidates have already demonstrated their commitment through their actions on campus.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section" id="contact">
+
+<h2>Contact Us</h2>
+
+<p>Have questions or want to get involved with the HEAL Movement? Reach out to us!</p>
+
+<div class="contact-info">
+<p><strong>Email:</strong> <a href="mailto:IDAHMUTABARI@GMAIL.COM" class="contact-link">IDAHMUTABARI@GMAIL.COM</a></p>
+<p><strong>Phone:</strong> <a href="tel:0798476346" class="contact-link">0798476346</a></p>
+</div>
+
+<div class="contact-form">
+<h3>Send us a Message</h3>
+<form id="contactForm">
+<div class="form-group">
+<label for="name">Your Name</label>
+<input type="text" id="name" name="name" required placeholder="Enter your full name">
+</div>
+
+<div class="form-group">
+<label for="email">Your Email</label>
+<input type="email" id="email" name="email" required placeholder="Enter your email address">
+</div>
+
+<div class="form-group">
+<label for="message">Your Message</label>
+<textarea id="message" name="message" required placeholder="What would you like to tell us?"></textarea>
+</div>
+
+<button type="submit" class="submit-btn">Send Message</button>
+</form>
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+<p>
+
+© 2026 HEAL Movement | SLCMC SRC Elections
+
+</p>
+
+</footer>
+
+<script>
+// THEME TOGGLE
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Check for saved theme preference or default to 'dark'
+const currentTheme = localStorage.getItem('theme') || 'dark';
+if (currentTheme === 'light') {
+  body.classList.add('light-mode');
+  themeToggle.textContent = '☀️ Light';
+}
+
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('light-mode');
+  
+  const isLightMode = body.classList.contains('light-mode');
+  localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+  themeToggle.textContent = isLightMode ? '☀️ Light' : '🌙 Dark';
+});
+
+// COUNTDOWN TIMER
+const countdown = new Date("July 31, 2026 00:00:00").getTime();
+
+setInterval(function(){
+  const now = new Date().getTime();
+  const distance = countdown - now;
+  
+  const days = Math.floor(distance/(1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
+  
+  document.getElementById("timer").innerHTML = 
+    days+" Days : "+hours+" Hours : "+minutes+" Minutes : "+seconds+" Seconds";
+}, 1000);
+
+// FAQ ACCORDION
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+  const question = item.querySelector('.faq-question');
+  
+  question.addEventListener('click', () => {
+    // Close all other items
+    faqItems.forEach(otherItem => {
+      if (otherItem !== item) {
+        otherItem.classList.remove('active');
+      }
+    });
+    
+    // Toggle current item
+    item.classList.toggle('active');
+  });
+});
+
+// CONTACT FORM
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  
+  // Create mailto link
+  const subject = encodeURIComponent('New Message from HEAL Movement Website');
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+  
+  window.location.href = `mailto:IDAHMUTABARI@GMAIL.COM?subject=${subject}&body=${body}`;
+  
+  // Reset form
+  contactForm.reset();
+});
+
+// IMAGE OPTIMIZATION - Lazy loading
+document.addEventListener('DOMContentLoaded', function() {
+  const images = document.querySelectorAll('img');
+  
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src || img.src;
+          img.classList.add('loaded');
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+  }
+});
+</script>
+
+</body>
+
+</html>

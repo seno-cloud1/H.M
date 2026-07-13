@@ -1075,7 +1075,7 @@ transparency and servant leadership.
 
 <h3>Send Us a Message</h3>
 
-<form>
+<form id="contactForm">
 
 <div class="form-group">
 <label for="name">Your Name</label>
@@ -1208,7 +1208,70 @@ target.scrollIntoView({ behavior: 'smooth' });
 });
 });
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+getFirestore,
+collection,
+addDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
+const firebaseConfig = {
+apiKey: "AIzaSyCnBduxuS_ykLrk1BKBKVBD1XrlshNMxQ0",
+authDomain: "heal-movement.firebaseapp.com",
+projectId: "heal-movement",
+storageBucket: "heal-movement.firebasestorage.app",
+messagingSenderId: "645966753334",
+appId: "1:645966753334:web:23cbeca89093c787263297"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
+window.collection = collection;
+window.addDoc = addDoc;
+window.serverTimestamp = serverTimestamp;
+</script>
+  <script type="module">
+
+const form=document.getElementById("contactForm");
+
+form.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const name=document.getElementById("name").value;
+const email=document.getElementById("email").value;
+const message=document.getElementById("message").value;
+
+try{
+
+await window.addDoc(
+window.collection(window.db,"messages"),
+{
+name,
+email,
+message,
+createdAt:window.serverTimestamp()
+});
+
+alert("Message sent successfully!");
+
+form.reset();
+
+}catch(err){
+
+console.log(err);
+
+alert("Unable to send message.");
+
+}
+
+});
+
+</script>
 </body>
 
 </html>

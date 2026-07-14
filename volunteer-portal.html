@@ -664,8 +664,27 @@
                     .where('email', '==', email)
                     .get();
 
-                if (!existingQuery.empty) {
-                    throw new Error('This email is already registered');
+               if (!existingQuery.empty) {
+    // Existing volunteer found
+    const volunteer = existingQuery.docs[0];
+
+    const enteredPassword = await hashPassword(password);
+
+    if (volunteer.data().passwordHash !== enteredPassword) {
+        throw new Error("Incorrect password");
+    }
+
+    currentUser = {
+        id: volunteer.id,
+        ...volunteer.data()
+    };
+
+    showNotification("Welcome back! 💙", "success");
+
+    setTimeout(() => showDashboard(), 800);
+
+    return;
+}
                 }
 
                 // Hash password (in production, use proper server-side hashing)

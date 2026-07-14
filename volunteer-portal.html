@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEAL Movement - Volunteer Portal</title>
@@ -14,7 +14,7 @@
     <a href="index.html">← Back to HEAL Movement</a>
 </div>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
@@ -50,25 +50,26 @@
             margin-bottom: 40px;
         }
 
-        .reg-header h1 {
-            color: #1E88E5;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
+        .reg-header h1{
+    color:#1565C0;
+    font-size:38px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+   
+     .reg-header p{
+    font-size:18px;
+    color:#607D8B;
+    font-weight:500;
+}
 
-        .reg-header p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .tagline {
-            color: #999;
-            font-size: 13px;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-
+     .tagline{
+    font-size:15px;
+    color:#90A4AE;
+    font-style:italic;
+    letter-spacing:.5px;
+}
         .form-group {
             margin-bottom: 20px;
         }
@@ -81,20 +82,22 @@
             font-size: 14px;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
+       .form-group input{
+    width:100%;
+    padding:15px;
+    border:2px solid #E3F2FD;
+    border-radius:12px;
+    background:#ffffff;
+    font-size:15px;
+    font-family:'Poppins',sans-serif;
+    transition:all .3s ease;
+}
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #1E88E5;
-            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
-        }
+.form-group input:focus{
+    outline:none;
+    border-color:#1E88E5;
+    box-shadow:0 0 12px rgba(30,136,229,.20);
+}
 
         .form-group input::placeholder {
             color: #ccc;
@@ -122,16 +125,21 @@
             transition: all 0.3s ease;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
-            color: white;
-        }
+       .btn-primary{
+    background:linear-gradient(135deg,#1565C0,#42A5F5);
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    border-radius:14px;
+    padding:16px;
+    transition:.3s;
+    box-shadow:0 8px 20px rgba(21,101,192,.25);
+}
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.4);
-        }
-
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(21,101,192,.35);
+}
         .btn-primary:active {
             transform: translateY(0);
         }

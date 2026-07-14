@@ -579,19 +579,19 @@
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
     <script>
         // Firebase Configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyBrO-REPLACED_WITH_YOUR_KEY",
-            authDomain: "your-project.firebaseapp.com",
-            projectId: "your-project-id",
-            storageBucket: "your-project.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abc123def456"
+  apiKey: "AIzaSyCnBduxuS_ykLrk1BKBKVBD1XrlshNMxQ0",
+  authDomain: "heal-movement.firebaseapp.com",
+  projectId: "heal-movement",
+  storageBucket: "heal-movement.firebasestorage.app",
+  messagingSenderId: "645966753334",
+  appId: "1:645966753334:web:23cbeca89093c787263297"
+};
         };
 
         // Initialize Firebase
@@ -785,7 +785,7 @@
                     });
                 } else {
                     await statsRef.set({
-                        volunteerCount: increment ? 1 : 0,
+                        volunteerCount: increment ? 11 : 10,
                         pledgeCount: 0,
                         target: VOLUNTEER_TARGET
                     });

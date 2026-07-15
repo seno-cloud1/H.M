@@ -315,69 +315,88 @@ Progress
 
 </div>
 
-<!-- Volunteer Profile -->
+<section class="poll-section">
 
-<div class="profile-card">
+<h2>🗳 STUDENT OPINION POLL</h2>
 
-<h2>
+<p><strong>Which student movement do you support?</strong></p>
 
-Volunteer Profile
+<label>
+<input type="radio" name="movement" value="HEAL">
+💙 HEAL MOVEMENT
+</label>
 
-</h2>
+<br><br>
 
-<table>
+<label>
+<input type="radio" name="movement" value="SAUTI">
+❤️ SAUTI YA COMRADE
+</label>
 
-<tr>
+<br><br>
 
-<td>Name</td>
+<button id="voteBtn">
+CAST MY VOTE
+</button>
 
-<td id="profileName">
+<hr>
 
--
+<h2>📊 LIVE RESULTS</h2>
 
-</td>
-
-</tr>
-
-<tr>
-
-<td>Admission</td>
-
-<td id="profileAdmission">
-
--
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>Status</td>
-
-<td>
-
-ACTIVE
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>Member Since</td>
-
-<td id="joinedDate">
-
--
-
-</td>
-
-</tr>
-
-</table>
-
+<div class="progress">
+<div id="healBar"></div>
 </div>
+
+<p>💙 HEAL MOVEMENT <span id="healPercent">68%</span></p>
+
+<div class="progress">
+<div id="sautiBar"></div>
+</div>
+
+<p>❤️ SAUTI YA COMRADE <span id="sautiPercent">32%</span></p>
+
+<h3>Total Votes:
+<span id="totalVotes">1284</span>
+</h3>
+
+<hr>
+
+<h2>🔥 LIVE STATISTICS</h2>
+
+<p>Registered Volunteers:
+<strong id="volunteers">18</strong></p>
+
+<p>Votes Cast:
+<strong id="votesCast">1284</strong></p>
+
+<p>Last Vote:
+<strong id="lastVote">2 Seconds Ago</strong></p>
+
+<hr>
+
+<h2>📈 SUPPORT TREND</h2>
+
+<canvas id="lineChart"></canvas>
+
+<hr>
+
+<h2>📊 VOTE COMPARISON</h2>
+
+<canvas id="barChart"></canvas>
+
+<hr>
+
+<h2>🥧 SUPPORT SHARE</h2>
+
+<canvas id="pieChart"></canvas>
+
+<hr>
+
+<h2>📉 VOTES PER HOUR</h2>
+
+<canvas id="hourChart"></canvas>
+
+</section>
 
 
 <div class="leaderboard">
@@ -433,7 +452,8 @@ Transforming Tomorrow.
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="app.js"></script>
 
 </body>
 </html>

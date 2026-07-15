@@ -590,7 +590,7 @@ if (voteBtn) {
 
                 const data = snapshot.data();
 
-                let healvotes = data.healvotes || 0;
+                let healvotes = data.healvotes || 2;
                 let sautivotes = data.sautivotes || 0;
 
                 if (heal) {

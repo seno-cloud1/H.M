@@ -108,17 +108,20 @@ loginPage.style.display="none";
 
 dashboard.style.display="block";
 
-document.getElementById("welcomeName").innerHTML=
-"Welcome, "+currentVolunteer.name;
+const profileName = document.getElementById("profileName");
+if (profileName) {
+    profileName.innerHTML = currentVolunteer.name;
+}
 
-document.getElementById("profileName").innerHTML=
-currentVolunteer.name;
+const profileAdmission = document.getElementById("profileAdmission");
+if (profileAdmission) {
+    profileAdmission.innerHTML = currentVolunteer.admission;
+}
 
-document.getElementById("profileAdmission").innerHTML=
-currentVolunteer.admission;
-
-document.getElementById("joinedDate").innerHTML=
-currentVolunteer.joined;
+const joinedDate = document.getElementById("joinedDate");
+if (joinedDate) {
+    joinedDate.innerHTML = currentVolunteer.joined;
+}
 
 listenStatistics();
 

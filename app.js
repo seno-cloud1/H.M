@@ -454,9 +454,7 @@ alert("Thank you for supporting HEAL Movement 💙");
 
 window.onload=function(){
 
-loadSession();
-
-};
+  };
 
 // =======================================
 // WELCOME ANIMATION

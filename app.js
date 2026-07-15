@@ -124,7 +124,7 @@ if (joinedDate) {
 }
 
 listenStatistics();
-
+listenPoll();
 listenNewest();
 
 checkPledge();

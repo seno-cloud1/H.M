@@ -377,3 +377,147 @@ list.appendChild(li);
 });
 
 }
+// =======================================
+// PLEDGE SYSTEM
+// =======================================
+
+async function checkPledge(){
+
+if(!currentVolunteer) return;
+
+const snapshot = await db.collection("pledges")
+.where("volunteerId","==",currentVolunteer.id)
+.get();
+
+if(!snapshot.empty){
+
+pledged = true;
+
+pledgeBtn.innerHTML="✔ Thank You For Standing With HEAL";
+
+pledgeBtn.disabled=true;
+
+pledgeBtn.style.background="#43A047";
+
+pledgeBtn.style.color="white";
+
+}
+
+}
+
+// =======================================
+// SUBMIT PLEDGE
+// =======================================
+
+pledgeBtn.addEventListener("click",async()=>{
+
+if(pledged) return;
+
+await db.collection("pledges").add({
+
+volunteerId:currentVolunteer.id,
+
+name:currentVolunteer.name,
+
+admission:currentVolunteer.admission,
+
+date:new Date().toLocaleString()
+
+});
+
+await db.collection("statistics")
+.doc("main")
+.update({
+
+pledges:
+firebase.firestore.FieldValue.increment(1)
+
+});
+
+pledged=true;
+
+pledgeBtn.innerHTML="✔ Thank You For Standing With HEAL";
+
+pledgeBtn.disabled=true;
+
+pledgeBtn.style.background="#43A047";
+
+pledgeBtn.style.color="white";
+
+alert("Thank you for supporting HEAL Movement 💙");
+
+});
+
+// =======================================
+// AUTO LOGIN
+// =======================================
+
+window.onload=function(){
+
+loadSession();
+
+};
+
+// =======================================
+// WELCOME ANIMATION
+// =======================================
+
+setInterval(()=>{
+
+const counter=document.getElementById("volunteerCounter");
+
+if(counter){
+
+counter.style.transform="scale(1.05)";
+
+setTimeout(()=>{
+
+counter.style.transform="scale(1)";
+
+},250);
+
+}
+
+},5000);
+
+// =======================================
+// MOTIVATIONAL QUOTES
+// =======================================
+
+const quotes=[
+
+"Leadership begins with one decision.",
+
+"Together we are stronger.",
+
+"Every volunteer matters.",
+
+"Change starts with you.",
+
+"Your voice builds tomorrow.",
+
+"Together We Lead.",
+
+"Together We Inspire.",
+
+"Together We Transform."
+
+];
+
+function showRandomQuote(){
+
+const subtitle=document.querySelector(".subtitle");
+
+if(!subtitle) return;
+
+subtitle.innerHTML=quotes[
+Math.floor(Math.random()*quotes.length)
+];
+
+}
+
+showRandomQuote();
+
+// =======================================
+// END OF APP.JS
+// =======================================

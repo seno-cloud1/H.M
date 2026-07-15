@@ -521,3 +521,150 @@ showRandomQuote();
 // =======================================
 // END OF APP.JS
 // =======================================
+/* ===========================
+   OPINION POLL CHARTS
+=========================== */
+
+const lineCtx = document.getElementById('lineChart');
+
+if (lineCtx) {
+
+new Chart(lineCtx, {
+
+type: 'line',
+
+data: {
+
+labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+
+datasets: [
+
+{
+
+label:'HEAL Movement',
+
+data:[18,25,34,41,53,67,74],
+
+borderColor:'#1565C0',
+
+backgroundColor:'rgba(21,101,192,.15)',
+
+tension:.4
+
+},
+
+{
+
+label:'Sauti Ya Comrade',
+
+data:[14,20,24,29,31,33,35],
+
+borderColor:'#E53935',
+
+backgroundColor:'rgba(229,57,53,.15)',
+
+tension:.4
+
+}
+
+]
+
+},
+
+options:{
+
+responsive:true
+
+}
+
+});
+
+}
+
+/* -------------------- */
+
+const barCtx=document.getElementById('barChart');
+
+if(barCtx){
+
+new Chart(barCtx,{
+
+type:'bar',
+
+data:{
+
+labels:['HEAL','SAUTI'],
+
+datasets:[{
+
+label:'Votes',
+
+data:[74,35]
+
+}]
+
+},
+
+options:{responsive:true}
+
+});
+
+}
+
+/* -------------------- */
+
+const pieCtx=document.getElementById('pieChart');
+
+if(pieCtx){
+
+new Chart(pieCtx,{
+
+type:'pie',
+
+data:{
+
+labels:['HEAL','SAUTI'],
+
+datasets:[{
+
+data:[74,35]
+
+}]
+
+},
+
+options:{responsive:true}
+
+});
+
+}
+
+/* -------------------- */
+
+const hourCtx=document.getElementById('hourChart');
+
+if(hourCtx){
+
+new Chart(hourCtx,{
+
+type:'bar',
+
+data:{
+
+labels:['8AM','9AM','10AM','11AM','12PM','1PM','2PM'],
+
+datasets:[{
+
+label:'Votes',
+
+data:[2,6,10,14,18,10,6]
+
+}]
+
+},
+
+options:{responsive:true}
+
+});
+
+}

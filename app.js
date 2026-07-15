@@ -562,7 +562,63 @@ function listenPoll(){
             sautiPercent + "%";
 
     });
+// =====================================
+// CAST STUDENT VOTE
+// =====================================
 
+const voteBtn = document.getElementById("voteBtn");
+
+if (voteBtn) {
+
+    voteBtn.addEventListener("click", async () => {
+
+        const heal = document.getElementById("healVote").checked;
+        const sauti = document.getElementById("sautiVote").checked;
+
+        if (!heal && !sauti) {
+            alert("Please choose a movement first.");
+            return;
+        }
+
+        const pollRef = db.collection("poll").doc("main");
+
+        try {
+
+            await db.runTransaction(async (transaction) => {
+
+                const snapshot = await transaction.get(pollRef);
+
+                const data = snapshot.data();
+
+                let healvotes = data.healvotes || 0;
+                let sautivotes = data.sautivotes || 0;
+
+                if (heal) {
+                    healvotes++;
+                } else {
+                    sautivotes++;
+                }
+
+                transaction.update(pollRef, {
+                    healvotes: healvotes,
+                    sautivotes: sautivotes,
+                    Totalvotes: healvotes + sautivotes
+                });
+
+            });
+
+            alert("✅ Thank you! Your vote has been recorded.");
+
+        } catch (error) {
+
+            console.error(error);
+            alert("Failed to record your vote.");
+
+        }
+
+    });
+
+}
 }
 // =======================================
 // END OF APP.JS

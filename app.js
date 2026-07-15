@@ -212,3 +212,168 @@ await increaseVolunteerCounter();
 showDashboard();
 
 });
+// =======================================
+// LOGIN
+// =======================================
+
+loginBtn.addEventListener("click", async () => {
+
+const admission = prompt("Enter Admission Number");
+
+if(!admission) return;
+
+const password = prompt("Enter Password");
+
+if(!password) return;
+
+const snapshot = await db.collection("volunteers")
+.where("admission","==",admission)
+.where("password","==",password)
+.get();
+
+if(snapshot.empty){
+
+alert("Invalid Admission Number or Password");
+
+return;
+
+}
+
+const doc = snapshot.docs[0];
+
+currentVolunteer = {
+
+id:doc.id,
+
+...doc.data()
+
+};
+
+saveSession();
+
+showDashboard();
+
+});
+
+// =======================================
+// LIVE STATISTICS
+// =======================================
+
+function listenStatistics(){
+
+db.collection("statistics")
+
+.doc("main")
+
+.onSnapshot((doc)=>{
+
+if(!doc.exists){
+
+db.collection("statistics")
+
+.doc("main")
+
+.set({
+
+volunteers:START_COUNT,
+
+pledges:0,
+
+goal:TARGET
+
+});
+
+return;
+
+}
+
+const data = doc.data();
+
+const volunteers = data.volunteers;
+
+const pledges = data.pledges;
+
+const percent = ((volunteers/TARGET)*100).toFixed(1);
+
+document.getElementById("volunteerCounter").innerHTML = volunteers;
+
+document.getElementById("statVolunteers").innerHTML = volunteers;
+
+document.getElementById("statPledges").innerHTML = pledges;
+
+document.getElementById("statPercent").innerHTML = percent+"%";
+
+document.getElementById("percentage").innerHTML = percent+"%";
+
+document.getElementById("progressFill").style.width = percent+"%";
+
+});
+
+}
+
+// =======================================
+// INCREASE COUNTER
+// =======================================
+
+async function increaseVolunteerCounter(){
+
+const ref = db.collection("statistics").doc("main");
+
+const doc = await ref.get();
+
+if(!doc.exists){
+
+await ref.set({
+
+volunteers:START_COUNT+1,
+
+pledges:0,
+
+goal:TARGET
+
+});
+
+return;
+
+}
+
+await ref.update({
+
+volunteers:
+firebase.firestore.FieldValue.increment(1)
+
+});
+
+}
+
+// =======================================
+// NEWEST VOLUNTEERS
+// =======================================
+
+function listenNewest(){
+
+db.collection("volunteers")
+
+.orderBy("joined","desc")
+
+.limit(5)
+
+.onSnapshot((snapshot)=>{
+
+const list = document.getElementById("latestVolunteers");
+
+list.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+const li=document.createElement("li");
+
+li.innerHTML=doc.data().name;
+
+list.appendChild(li);
+
+});
+
+});
+
+}

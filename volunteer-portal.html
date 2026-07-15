@@ -322,16 +322,64 @@ Progress
 <p><strong>Which student movement do you support?</strong></p>
 
 <label>
-<input type="radio" name="movement" value="HEAL">
+
+<div class="glass-card"><input type="radio" name="movement" value="HEAL">
 💙 HEAL MOVEMENT
 </label>
 
 <br><br>
 
 <label>
-<input type="radio" name="movement" value="SAUTI">
-❤️ SAUTI YA COMRADE
+    <input type="radio"
+           name="movement"
+           value="heal"
+           id="healVote">
+    💙 HEAL MOVEMENT
 </label>
+
+<br><br>
+
+<label>
+    <input type="radio"
+           name="movement"
+           value="sauti"
+           id="sautiVote">
+    ❤️ SAUTI YA COMRADE
+</label>
+
+<br><br>
+
+<button id="voteBtn" class="vote-btn">
+    CAST MY VOTE
+</button>
+
+<hr>
+
+<h2>📊 LIVE RESULTS</h2>
+
+<div class="glass-card">
+
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;">
+
+<div>
+    
+<input
+type="radio"
+name="movement"
+value="heal"
+id="healVote">
+
+<label for="healVote">💙 HEAL MOVEMENT</label>
+
+<br><br>
+
+<input
+type="radio"
+name="movement"
+value="sauti"
+id="sautiVote">
+
+<label for="sautiVote">❤️ SAUTI YA COMRADE</label>
 
 <br><br>
 
@@ -342,12 +390,12 @@ CAST MY VOTE
 <hr>
 
 <h2>📊 LIVE RESULTS</h2>
+
 <div class="glass-card">
 
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;">
 
 <div>
-
 <h3>🏆 Leading Movement</h3>
 
 <h1 id="leaderName">💙 HEAL MOVEMENT</h1>

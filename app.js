@@ -365,7 +365,11 @@ db.collection("volunteers")
 
 const list = document.getElementById("latestVolunteers");
 
-list.innerHTML="";
+if (!list) {
+    return;
+}
+
+list.innerHTML = "";
 
 snapshot.forEach((doc)=>{
 

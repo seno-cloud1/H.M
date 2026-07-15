@@ -26,7 +26,7 @@ const db = firebase.firestore();
 // =======================================
 
 const TARGET = 500;
-const START_COUNT = 10;
+const START_COUNT = 21;
 
 let currentVolunteer = null;
 let pledged = false;

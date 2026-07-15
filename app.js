@@ -528,16 +528,26 @@ showRandomQuote();
 
 function listenPoll(){
 
-    db.collection("poll")
+    db.collection("statistics")
+    .doc("main")
+    .collection("poll")
     .doc("main")
     .onSnapshot((doc)=>{
 
-        if(!doc.exists) return;
+        if (!doc.exists) {
+            console.log("Poll document not found.");
+            return;
+        }
 
         const data = doc.data();
 
         const heal = data.healvotes || 0;
         const sauti = data.sautivotes || 0;
+
+        // ...the rest of your code...
+    });
+
+}
 
         const total = heal + sauti;
 
@@ -580,7 +590,11 @@ if (voteBtn) {
             return;
         }
 
-        const pollRef = db.collection("poll").doc("main");
+      const pollRef = db
+    .collection("statistics")
+    .doc("main")
+    .collection("poll")
+    .doc("main");
 
         try {
 
@@ -590,7 +604,7 @@ if (voteBtn) {
 
                 const data = snapshot.data();
 
-                let healvotes = data.healvotes || 2;
+                let healvotes = data.healvotes || 0;
                 let sautivotes = data.sautivotes || 0;
 
                 if (heal) {

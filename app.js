@@ -668,3 +668,82 @@ options:{responsive:true}
 });
 
 }
+// ================================
+// STUDENT OPINION POLL
+// ================================
+
+const voteBtn = document.getElementById("voteBtn");
+
+if (voteBtn) {
+
+    voteBtn.addEventListener("click", async () => {
+
+        const selected = document.querySelector('input[name="movement"]:checked');
+
+        if (!selected) {
+            alert("Please select a movement first.");
+            return;
+        }
+
+        const pollRef = db.collection("poll").doc("main");
+
+        await db.runTransaction(async (transaction) => {
+
+            const doc = await transaction.get(pollRef);
+
+            if (!doc.exists) return;
+
+            const data = doc.data();
+
+            let healVotes = data.healVotes || 0;
+            let sautiVotes = data.sautiVotes || 0;
+            let totalVotes = data.totalVotes || 0;
+
+            if (selected.value === "HEAL") {
+                healVotes++;
+            } else {
+                sautiVotes++;
+            }
+
+            totalVotes++;
+
+            transaction.update(pollRef, {
+                healVotes,
+                sautiVotes,
+                totalVotes
+            });
+
+        });
+
+        alert("✅ Thank you! Your vote has been recorded.");
+
+    });
+
+}
+// ================================
+// LIVE POLL RESULTS
+// ================================
+
+db.collection("poll").doc("main").onSnapshot((doc) => {
+
+    if (!doc.exists) return;
+
+    const data = doc.data();
+
+    const healVotes = data.healVotes || 0;
+    const sautiVotes = data.sautiVotes || 0;
+    const totalVotes = data.totalVotes || 0;
+
+    document.getElementById("totalVotes").textContent = totalVotes;
+    document.getElementById("votesCast").textContent = totalVotes;
+
+    const healPercent = totalVotes === 0 ? 0 : Math.round((healVotes / totalVotes) * 100);
+    const sautiPercent = totalVotes === 0 ? 0 : Math.round((sautiVotes / totalVotes) * 100);
+
+    document.getElementById("healPercent").textContent = healPercent + "%";
+    document.getElementById("sautiPercent").textContent = sautiPercent + "%";
+
+    document.getElementById("healBar").style.width = healPercent + "%";
+    document.getElementById("sautiBar").style.width = sautiPercent + "%";
+
+});

@@ -7,12 +7,12 @@
 // Replace these with your Firebase project values
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "XXXXXXXXXXXX",
-    appId: "XXXXXXXXXXXXXXXXXXXX"
+  apiKey: "AIzaSyCnBduxuS_ykLrk1BKBKVBD1XrlshNMxQ0",
+  authDomain: "heal-movement.firebaseapp.com",
+  projectId: "heal-movement",
+  storageBucket: "heal-movement.firebasestorage.app",
+  messagingSenderId: "645966753334",
+  appId: "1:645966753334:web:23cbeca89093c787263297"
 };
 
 // Initialize Firebase

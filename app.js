@@ -534,7 +534,7 @@ function listenPoll(){
     .doc("main")
     .onSnapshot((doc)=>{
 
-        if (!doc.exists) {
+        if(!doc.exists){
             console.log("Poll document not found.");
             return;
         }
@@ -543,11 +543,6 @@ function listenPoll(){
 
         const heal = data.healvotes || 0;
         const sauti = data.sautivotes || 0;
-
-        // ...the rest of your code...
-    });
-
-}
 
         const total = heal + sauti;
 
@@ -563,7 +558,8 @@ function listenPoll(){
         document.getElementById("sautiPercent").innerHTML =
             "❤️ SAUTI YA COMRADE " + sautiPercent + "%";
 
-        document.getElementById("totalVotes").innerHTML = total;
+        document.getElementById("totalVotes").innerHTML =
+            total;
 
         document.getElementById("healBar").style.width =
             healPercent + "%";
@@ -572,6 +568,8 @@ function listenPoll(){
             sautiPercent + "%";
 
     });
+
+}
 // =====================================
 // CAST STUDENT VOTE
 // =====================================
@@ -632,7 +630,6 @@ if (voteBtn) {
 
     });
 
-}
 }
 // =======================================
 // END OF APP.JS

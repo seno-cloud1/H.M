@@ -522,7 +522,48 @@ Math.floor(Math.random()*quotes.length)
 }
 
 showRandomQuote();
+// =====================================
+// LIVE OPINION POLL
+// =====================================
 
+function listenPoll(){
+
+    db.collection("poll")
+    .doc("main")
+    .onSnapshot((doc)=>{
+
+        if(!doc.exists) return;
+
+        const data = doc.data();
+
+        const heal = data.healvotes || 0;
+        const sauti = data.sautivotes || 0;
+
+        const total = heal + sauti;
+
+        const healPercent =
+            total > 0 ? Math.round((heal / total) * 100) : 0;
+
+        const sautiPercent =
+            total > 0 ? 100 - healPercent : 0;
+
+        document.getElementById("healPercent").innerHTML =
+            "💙 HEAL MOVEMENT " + healPercent + "%";
+
+        document.getElementById("sautiPercent").innerHTML =
+            "❤️ SAUTI YA COMRADE " + sautiPercent + "%";
+
+        document.getElementById("totalVotes").innerHTML = total;
+
+        document.getElementById("healBar").style.width =
+            healPercent + "%";
+
+        document.getElementById("sautiBar").style.width =
+            sautiPercent + "%";
+
+    });
+
+}
 // =======================================
 // END OF APP.JS
 // =======================================
